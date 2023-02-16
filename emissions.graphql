@@ -1,0 +1,109 @@
+
+
+type CountryEmission {
+  Country: String!
+  Year: String
+  Total: String
+  Coal: String
+  Oil: String
+  Gas: String
+  Cement: String
+  Flaring: String
+  Other: String
+}
+
+type CountryEmissions {
+  Emissions: [CountryEmission!]!
+}
+
+type ConnectionError {
+  port: Int!
+  code: String!
+  errno: Int!
+}
+union EmissionsResult = CountryEmissions | ConnectionError
+
+
+
+
+type Warrior {
+  id: ID!
+  name: String!
+  lname: String!
+}
+type Weapon {
+  id: ID!
+  name: String!
+  type: String!
+}
+union WarriorResult = Warrior | Weapon
+
+type Jobs {
+  Designer: Int
+  Engineer: Int
+  Founder: Int
+  Investor: Int
+  Marketer: Int
+  Management: Int
+  Product: Int
+  Sales: Int
+}
+type Company {
+  id: ID!
+  company_name: String!
+  headline: String
+  tags: [String]
+  website: String
+  employees: String
+  about: String
+  locations: String
+  industries: String
+  jobs: Jobs
+}
+
+type COCO {
+  info: Info
+  images: [Image]
+  licenses: [License]
+}
+
+type Info {
+  description: String
+  url: String
+  version: String
+  title: String
+  year: Int
+  contributor: String
+  date_created: String
+}
+
+type License {
+  url: String
+  id: Int
+  name: String
+}
+
+type Image {
+  license: Int
+  file_name: String
+  coco_url: String
+  height: Int
+  width: Int
+  flickr_url: String
+  date_captured: String
+  id: Int
+}
+
+
+
+
+type Query {
+  getWarriorsOrWeapons: [WarriorResult]
+  getEmissions: EmissionsResult
+  getYear(year: Int): [CountryEmission]
+  getCompanies: [Company]
+  getCOCO: COCO
+}
+type Mutation {
+  addEmissions(year: String!): CountryEmissions
+}
